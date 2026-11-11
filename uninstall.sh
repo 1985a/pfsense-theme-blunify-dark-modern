@@ -49,7 +49,10 @@ if grep -q "$HOOK_MARK" "$FOOT"; then
 fi
 
 # --- 3. Borrar archivos ---
-rm -f "$WWW"/css/pfSense-theme-blunify-dark-modern-2.8-v4.9.css
+# versiones publicadas por este repositorio
+for v in 4.9 5.0; do
+	rm -f "$WWW/css/pfSense-theme-blunify-dark-modern-2.8-v$v.css"
+done
 rm -f "$WWW/js/zebes-flags.js"
 rm -rf "$WWW/vendor/flag-icons"
 rm -f "$PREV_FILE"

@@ -15,7 +15,7 @@ set -eu
 
 REPO="1985a/pfsense-theme-blunify-dark-modern"
 BRANCH="main"
-THEME="pfSense-theme-blunify-dark-modern-2.8-v4.9.css"
+THEME="pfSense-theme-blunify-dark-modern-2.8-v5.0.css"
 WWW="/usr/local/www"
 FOOT="$WWW/foot.inc"
 FOOT_BAK="/root/foot.inc.bak-blunify"

@@ -1,5 +1,15 @@
 # Cambios
 
+## 5.0 — 2026-11-11
+
+Adaptación a móvil (solo por debajo de 768 px; el escritorio no cambia).
+
+- Zonas táctiles: iconos de acción, casillas, botones y menú más grandes.
+- Campos a 16 px para que iOS no haga zoom al enfocar.
+- Pestañas en filas completas; botones de acción agrupados a la derecha.
+- Widgets del Dashboard: el texto salta de línea en vez de cortarse.
+- Sin el borde claro que Bootstrap pone a las tablas en pantallas pequeñas.
+
 ## 4.9 — 2026-11-11
 
 - Banderas en las columnas GeoIP de pfBlockerNG (`js/zebes-flags.js` + flag-icons).

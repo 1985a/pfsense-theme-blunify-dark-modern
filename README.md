@@ -9,6 +9,9 @@ el texto se lea bien y nada quede con los colores claros de fábrica.
   WireGuard, ntopng y BandwidthD.
 - Foco de teclado visible, controles nativos en modo oscuro y respeto de
   "reducir movimiento".
+- **Móvil:** por debajo de 768 px los botones, iconos y campos crecen para el
+  dedo, las pestañas llenan filas completas y los widgets del Dashboard dejan
+  de cortar el texto. En escritorio no cambia nada.
 - Opcional: **banderas** en las columnas GeoIP de pfBlockerNG. Al pasar el ratón
   se ve el código de país de dos letras.
 
@@ -19,6 +22,8 @@ el texto se lea bien y nada quede con los colores claros de fábrica.
 | ![Reglas del firewall](docs/rules.png) | ![Alertas de pfBlockerNG](docs/alerts.png) |
 
 ![Formulario de edición de una regla](docs/form.png)
+
+![Vista en móvil: Dashboard, reglas y alertas](docs/mobile.png)
 
 Las capturas usan datos de ejemplo: direcciones, nombres y descripciones no son reales.
 
@@ -58,7 +63,7 @@ sh /tmp/install.sh --no-activate   # copia los archivos sin cambiar el tema acti
 
 ### Instalación manual (solo el tema)
 
-Copia `css/pfSense-theme-blunify-dark-modern-2.8-v4.9.css` a
+Copia `css/pfSense-theme-blunify-dark-modern-2.8-v5.0.css` a
 `/usr/local/www/css/` y elígelo en **System → General Setup → Theme**.
 
 ## Después de actualizar pfSense
@@ -90,7 +95,8 @@ archivos.
 - La página de inicio de sesión usa `login.css`, que este tema no cambia.
 - En el Dashboard, los widgets *Interfaces* e *Interface Statistics* pueden
   mostrar desplazamiento horizontal en columnas estrechas.
-- No está ajustado para pantallas de móvil más allá de lo que hace pfSense.
+- En móvil, las tablas anchas (reglas, alertas, leases) se recorren con
+  desplazamiento horizontal; no se convierten en tarjetas.
 
 ## Créditos y licencia
 

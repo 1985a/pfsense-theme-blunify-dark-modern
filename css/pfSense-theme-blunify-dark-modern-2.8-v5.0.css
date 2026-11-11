@@ -1,5 +1,5 @@
 /*
- * Blunify Dark Modern (pfSense 2.8 compatible) - v4.9
+ * Blunify Dark Modern (pfSense 2.8 compatible) - v5.0
  * Based on pfSense-theme-blunify-dark.css (user-provided).
  * Notes:
  *  - No external font dependency (uses system font stack)
@@ -2505,4 +2505,100 @@ img.zebes-flag {
   box-shadow: 0 0 0 1px rgba(255,255,255,.18);
   vertical-align: -3px;
   cursor: help;
+}
+
+/* ==========================================================================
+   v5.0 — móvil (2026-11-11)
+   Todo lo de este bloque solo se aplica por debajo de 768 px, el mismo corte
+   que usa Bootstrap 3 en pfSense. En escritorio no cambia nada.
+   ========================================================================== */
+@media (max-width: 767px) {
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+  /* --- M1. Paneles y títulos más compactos --- */
+  .panel { margin-bottom: 12px; }
+  .panel-heading { padding: 10px 12px; }
+  .panel-title { font-size: 17px; }
+  .header .breadcrumb, .page-header h1 { font-size: 16px; }
+
+  /* --- M2. Tablas: Bootstrap les pone un borde claro en pantallas pequeñas --- */
+  .table-responsive {
+    border: 0;
+    margin-bottom: 0;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  /* --- M3. Widgets del Dashboard: el texto se cortaba porque no podía saltar de línea --- */
+  .panel[id^="widget-"] .table-responsive > .table > tbody > tr > td,
+  .panel[id^="widget-"] .table-responsive > .table > tbody > tr > th,
+  .panel[id^="widget-"] .table > tbody > tr > td,
+  .panel[id^="widget-"] .table > tbody > tr > th {
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  /* --- M4. Pestañas: filas completas en vez de escalera --- */
+  .nav-tabs, .nav-pills { row-gap: 4px; column-gap: 4px; }
+  .nav-tabs > li, .nav-pills > li { flex: 1 1 auto; text-align: center; margin: 0; }
+  .nav-tabs > li > a, .nav-pills > li > a {
+    padding: 10px 10px;
+    border-radius: var(--radius-sm) !important;
+    white-space: nowrap;
+  }
+
+  /* --- M5. Zonas táctiles: iconos de acción de las tablas y de los paneles --- */
+  .table td a[class*="fa-"], .table td i.icon-pointer, .table td a > i[class*="fa-"],
+  .table td button > i[class*="fa-"], .table th a[class*="fa-"] {
+    display: inline-block;
+    min-width: 32px;
+    min-height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 16px;
+  }
+  .panel-heading .widget-heading-icon a, .panel-heading .icons a {
+    display: inline-block;
+    min-width: 34px;
+    padding: 4px 0;
+    text-align: center;
+  }
+  .header .context-links li a { display: inline-block; min-width: 28px; padding: 4px 0; text-align: center; }
+  /* el encabezado contiene sus iconos flotantes: no empujan el cuerpo del panel */
+  .panel-heading::after { content: ""; display: table; clear: both; }
+  input[type="checkbox"], input[type="radio"] { width: 20px; height: 20px; }
+  .checkbox label, .radio label { padding-left: 28px; min-height: 24px; line-height: 24px; }
+  .checkbox input[type="checkbox"], .radio input[type="radio"] { margin-left: -28px; margin-top: 2px; }
+
+  /* --- M6. Formularios: 16 px evita el zoom automático de iOS al enfocar --- */
+  .form-control, input[type="text"], input[type="password"], input[type="number"],
+  input[type="email"], input[type="url"], input[type="search"], select, textarea {
+    font-size: 16px !important;
+    min-height: 40px;
+  }
+  select[multiple], select[size] { min-height: 96px; }
+  .form-group { padding-top: 6px; padding-bottom: 6px; }
+  .form-horizontal .control-label { padding-bottom: 4px; }
+  .help-block { font-size: 13px; }
+
+  /* --- M7. Botones --- */
+  .btn { min-height: 40px; padding: 9px 14px; font-size: 15px; }
+  .btn-sm { min-height: 36px; padding: 7px 12px; font-size: 14px; }
+  .btn-xs { min-height: 32px; padding: 5px 10px; font-size: 13px; }
+  nav.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  nav.action-buttons > .btn { margin: 0; flex: 0 1 auto; }
+
+  /* --- M8. Menú desplegado: filas más altas para el dedo --- */
+  .navbar-nav > li > a { padding-top: 13px; padding-bottom: 13px; font-size: 16px; }
+  .navbar-nav .open .dropdown-menu > li > a { padding: 11px 15px 11px 28px; font-size: 15px; }
+  .navbar-collapse { max-height: calc(100vh - 56px); overflow-y: auto; }
+
+  /* --- M9. Pie de página --- */
+  .footer, footer.footer { font-size: 12px; padding: 10px 8px; }
 }
