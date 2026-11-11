@@ -1,0 +1,2508 @@
+/*
+ * Blunify Dark Modern (pfSense 2.8 compatible) - v4.9
+ * Based on pfSense-theme-blunify-dark.css (user-provided).
+ * Notes:
+ *  - No external font dependency (uses system font stack)
+ *  - Modernized surfaces, borders, rounded corners, focus ring
+ */
+/*
+ * pfSense-dark.css
+ *
+ * part of pfSense (https://www.pfsense.org)
+ * Copyright (c) 2016 Electric Sheep Fencing
+ * Copyright (c) 2016-2021 Rubicon Communications, LLC (Netgate)
+ * All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/* @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap'); */  /* disabled: avoid external dependency */
+@import url("/css/pfSense.css");
+@import url("/vendor/jquery-ui/themes/dark-hive/theme.css");
+
+:root {
+    /* Core palette (UniFi-ish dark) */
+    --bg-primary-color: #0f1320;
+    --bg-secondary-color: #161b2b;
+    --bg-alternate-color: #121728;
+
+    --surface-1: #161b2b;
+    --surface-2: #1b2135;
+    --surface-3: #202844;
+
+    --border-primary-color: #24304f;
+    --border-secondary-color: #2a365a;
+
+    --text-primary: #e9edf7;
+    --text-secondary: #b9c2d7;
+    --text-muted: #8c96ad;
+
+    --button-primary-color: #1677ff;
+    --button-primary-hover: #0f66e6;
+    --link-primary-color: #5aa3ff;
+
+    --danger: #ff4d4f;
+    --warning: #ffb020;
+    --success: #2fd27d;
+    --info: #2f9bff;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+
+    --shadow-1: 0 6px 18px rgba(0,0,0,.35);
+    --shadow-2: 0 10px 30px rgba(0,0,0,.45);
+
+    --focus-ring: 0 0 0 3px rgba(22,119,255,.25);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    background-color: var(--bg-primary-color);
+    color: var(--text-secondary);
+    font-weight: 400;
+
+}
+
+body.no-menu {
+    background-color: #616161;
+}
+
+a {
+    color: var(--link-primary-color);
+    text-decoration: none;
+}
+
+
+a:hover {
+    color: var(--link-primary-color);
+    text-decoration: none;
+}
+
+h1 a:link, h1 a:visited {
+    color: #fff;
+}
+
+h1 a:hover, h1 a:active {
+    color: #fff;
+    text-decoration: none !important;
+}
+
+/** Content structure */
+
+.contains-table table {
+    border: 1px solid var(--border-primary-color);
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    border-color: var(--border-secondary-color);
+}
+
+.table-hover > tbody > tr:hover, .table-striped > tbody > tr:nth-of-type(odd):hover {
+    background-color: var(--surface-2);
+}
+
+table.sortable-theme-bootstrap {
+    color: #e0e0e0 !important;
+    background-color:var(--bg-primary-color) !important;
+}
+
+.table > tbody + tbody {
+    border-top: 2px solid #616161;
+}
+
+.dropdown-menu {
+    background: var(--surface-3);
+    border: 1px solid var(--border-primary-color);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-1);
+    opacity: 1;
+}
+
+.dropdown-menu > li > a {
+    color: #e0e0e0;
+}
+
+.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+    background-color: #303030;
+    color: #e0e0e0;
+}
+
+/** Page header with title and breadcrumb */
+.header {
+    background-color: var(--bg-primary-color);
+    box-shadow: none;
+    font-weight: 300;
+    margin-top: 0px
+}
+
+.breadcrumb {
+    background-color: transparent;
+    border-bottom: 1px solid var(--border-primary-color);
+    border-radius: 0;
+    padding-left: 0;
+}
+
+.breadcrumb > li + li:before {
+    color: #9E9E9E;
+}
+
+ul.context-links li a {
+    color: var(--button-primary-color);
+
+}
+
+/* navigation */
+.navbar-inverse {
+    background-color: var(--bg-secondary-color);
+    border: 0;
+}
+
+.nav > li > a {
+    border-bottom: 0;
+    color: #EFEFEF
+
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+    background-color: rgba(22,119,255,.18);
+    border-bottom: 2px solid var(--button-primary-color);
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav li.open > a, .nav li.open > a:focus, .nav-pills > li.active > a:hover {
+    background-color: rgba(0, 111, 254, 1)!important;
+    box-shadow: var(--shadow-1);
+    border-bottom: 2px solid var(--button-primary-color);
+    color: #FFF;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    border-bottom: 5px solid var(--bg-secondary-color);
+}
+
+.nav-tabs > li > a {
+    border-bottom: 5px solid #212121;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover, .nav-tabs > li > a:hover {
+    border-left: 1px solid #212121;
+    border-right: 1px solid #212121;
+    border-top: 1px solid #212121;
+    border-bottom: 2px solid var(--button-primary-color);
+    background-color: #212121;
+    color: var(--button-primary-color);
+}
+
+.nav-tabs {
+    border-bottom: 1px solid var(--border-primary-color);
+}
+
+/* end navigation */
+
+/* start common colors */
+.alert-warning {
+    color: #1b1200;
+    border: 1px solid rgba(255,176,32,.35);
+    background: rgba(255,176,32,.20);
+}
+
+.alert-success {
+    border: 1px solid rgba(47,210,125,.35);
+    background: rgba(47,210,125,.14);
+    color: var(--text-primary);
+}
+
+.alert-info {
+    border: 1px solid rgba(47,155,255,.35);
+    background: rgba(47,155,255,.14);
+    color: var(--text-primary);
+}
+
+.bg-primary {
+    color: #000;
+    background-color: var(--button-primary-color);
+}
+
+.bg-success {
+    color: #000;
+    background-color: #80CBC4;
+}
+
+.btn-default {
+    color: var(--text-primary);
+    background-color: var(--surface-2);
+    border-color: var(--border-primary-color);
+    border-radius: var(--radius-sm);
+}
+
+.btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover, .open > .dropdown-toggle.btn-default {
+    color: var(--text-primary);
+    background-color: var(--surface-2);
+    border-color: var(--border-primary-color);
+    border-radius: var(--radius-sm);
+}
+
+.btn-info {
+    background-color: #2196F3;
+    border-color: #1976D2;
+}
+
+.btn-info.active, .btn-info.focus, .btn-info:active, .btn-info:focus, .btn-info:hover, .open > .dropdown-toggle.btn-info {
+    background-color: #1565C0;
+    border-color: #0D47A1;
+}
+
+.btn-primary {
+    background-color: var(--button-primary-color);
+    border-color: #00796B;
+}
+
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
+    background-color: #00796B;
+    border-color: #00695C;
+}
+
+.btn-success {
+    background-color: var(--button-primary-color);
+    border: 1px solid var(--button-primary-color);
+    color: #fff;
+    border-radius: var(--radius-sm);
+}
+
+.btn-success.active, .btn-success.focus, .btn-success:active, .btn-success:focus, .btn-success:hover, .open > .dropdown-toggle.btn-success {
+    background-color: var(--button-primary-hover);
+    border-color: var(--button-primary-hover);
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #D32F2F;
+    border-color: #D32F2F;
+}
+
+.btn-danger.active, .btn-danger.focus, .btn-danger:active, .btn-danger:focus, .btn-danger:hover, .open > .dropdown-toggle.btn-danger {
+    background-color: #C62828;
+    border-color: #B71C1C;
+}
+
+.btn-warning {
+    background-color: #FFA000;
+    border-color: #FF8F00;
+}
+
+.btn-warning.active, .btn-warning.focus, .btn-warning:active, .btn-warning:focus, .btn-warning:hover, .open > .dropdown-toggle.btn-warning {
+    background-color: #FF8F00;
+    border-color: #FF6F00;
+}
+
+/* end common colors */
+
+caption {
+    color: #E0E0E0;
+    background-color: #303030;
+}
+
+.form-control {
+    background-color: var(--surface-2);
+    border: 1px solid var(--border-primary-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+}
+.form-control:focus {
+    border-color: var(--button-primary-color);
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+.form-group {
+    border-bottom: 1px solid var(--border-primary-color);
+}
+
+.panel-default > .panel-heading {
+    color: var(--text-primary);
+    background-color: transparent;
+    border-color: transparent;
+    font-weight: 500;
+    padding: 12px 14px;
+}
+
+.panel {
+    background-color: var(--surface-1);
+    border: 1px solid var(--border-primary-color);
+    border-radius: var(--radius-md);
+    box-shadow: none;
+}
+
+.panel-footer {
+    background-color: #424242;
+}
+
+.help-block {
+    color: #7e8190;
+}
+
+.checkbox label, .radio label {
+    color: #eeeeee;
+}
+
+.table-striped > thead {
+    background-color: var(--surface-2);
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: var(--bg-alternate-color);
+}
+
+.table-striped > tbody > tr.disabled:nth-of-type(odd) {
+    background-color: rgba(48, 48, 48, .5);
+    color: rgba(255, 255, 255, .5);
+}
+
+.table-striped > tbody > tr.disabled:nth-of-type(even) {
+    background-color: rgba(66, 66, 66, .5);
+    color: rgba(255, 255, 255, .5);
+}
+
+.table-hover > tbody > tr.disabled:hover, .table-striped > tbody > tr.disabled:nth-of-type(odd):hover, .table-striped > tbody > tr.disabled:nth-of-type(even):hover {
+    background-color: rgba(117, 117, 117, .5);
+}
+
+tr.disabled a {
+    color: rgba(0, 150, 136, .5);
+}
+
+.table-striped > tbody > tr.disabled > td:first-child {
+    border-left: 3px solid #F44336;
+    padding-left: 7px;
+}
+
+.table-bordered {
+    border: 1px solid #303030;
+}
+
+.table-bordered > thead {
+    background-color: #000;
+}
+
+.table .table {
+    background-color: #424242;
+}
+
+/* active table row */
+.table > tbody > tr.active > td, .table > tbody > tr.active > th, .table > tbody > tr > td.active, .table > tbody > tr > th.active, .table > tfoot > tr.active > td, .table > tfoot > tr.active > th, .table > tfoot > tr > td.active, .table > tfoot > tr > th.active, .table > thead > tr.active > td, .table > thead > tr.active > th, .table > thead > tr > td.active, .table > thead > tr > th.active {
+    background-color: #80CBC4;
+    color: #212121;
+}
+
+/* active table row on hover */
+.table-hover > tbody > tr.active:hover > td, .table-hover > tbody > tr.active:hover > th, .table-hover > tbody > tr:hover > .active, .table-hover > tbody > tr > td.active:hover, .table-hover > tbody > tr > th.active:hover {
+    background-color: #80CBC4;
+    color: #212121;
+}
+
+.popover-title {
+    background-color: #424242;
+    border-bottom: 1px solid #212121;
+}
+
+.popover {
+    background-color: #616161;
+}
+
+.popover.right > .arrow:after {
+    border-right-color: #212121;
+}
+
+.modal-content {
+    background-color: #424242;
+}
+
+.modal-header, .modal-footer {
+    background-color: #303030;
+    border-color: #212121;
+
+}
+
+/** Page footer */
+.footer {
+    background-color: var(--bg-secondary-color);
+    border-top: 1px solid var(--border-primary-color);
+}
+
+.footer a {
+    color: #fff;
+}
+
+/** Homepage / dashboard */
+.widget .panel-heading {
+    font-size:14px;
+    background-color: var(--background-primary-color);
+}
+
+#widgetSequence {
+    border-top: 1px solid #ddd;
+}
+
+a.list-group-item, .list-group-item {
+    background-color: var(--surface-2);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary-color);
+    border-radius: var(--radius-sm);
+    margin-bottom: 6px;
+}
+
+a.list-group-item:focus, a.list-group-item:hover, .list-group-item:focus, .list-group-item:hover {
+    background-color: #303030;
+    color: #e0e0e0;
+}
+
+a.list-group-item .list-group-item-heading, .list-group-item .list-group-item-heading {
+    color: #EEEEEE;
+}
+
+.progress {
+    background: var(--surface-3);
+    border-radius: var(--radius-sm);
+}
+
+.progress-bar {
+    background-color: #39cc64;
+}
+
+.icon-embed-btn {
+    color: white;
+}
+
+/* Used when you need an icon to act as a submit button **/
+.button-icon {
+    color: #337AB7;
+}
+
+button.close {
+    padding: 0 4px 1px 4px;
+    border: 1px solid #6D4C41;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #6D4C41;
+}
+
+.modal-header button.close {
+    border: 1px solid #fff;
+    box-shadow: 1px 1px 1px #fff;
+    color: #fff;
+}
+
+input, select, textarea {
+    color: var(--text-primary);
+}
+
+
+/* tree css */
+ul.tree li A:link, ul.tree li A:hover, ul.tree li A:visited {
+    color: #ffffff;
+}
+
+/*sortable table*/
+
+table[data-sortable].sortable-theme-bootstrap th[data-sorted="true"] {
+    background-color: #000;
+    color: var(--button-primary-color);
+    border-bottom-color: var(--button-primary-color);
+}
+
+table[data-sortable].sortable-theme-bootstrap tbody td {
+    border-top: 1px solid #303030;
+}
+
+textarea {
+    background-color: var(--surface-2);
+}
+
+/** Styling for jQuery autocomplete widget */
+.ui-autocomplete {
+    color: #212121;
+    background-color: #e0e0e0;
+    background-image: none;
+}
+
+.ui-widget {
+    font-family: Roboto, sans-serif;
+}
+
+/* Callouts */
+.bs-callout {
+    padding: 10px 15px;
+    margin: 20px 0;
+    border: 1px solid #424242;
+    border-left-width: 5px;
+    border-radius: 3px;
+    font-size: 13px;
+    color:#FFF;
+    background: linear-gradient(358deg, #a94442 0%, #d9534f 100%);
+}
+
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    
+}
+
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.bs-callout code {
+    border-radius: 3px;
+}
+
+.bs-callout + .bs-callout {
+    margin-top: -5px;
+}
+
+/* Callout contextual classes */
+.bs-callout-default {
+    border-left-color: #777;
+}
+
+.bs-callout-default h4 {
+    color: #FFF;
+}
+
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+
+.bs-callout-danger h4 {
+    color: #FFF;
+}
+
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+
+.bs-callout-info {
+    border-left-color: #01579B;
+}
+
+.bs-callout-info h4 {
+    color: #01579B;
+}
+
+/* D3 Styles */
+
+.traffic-widget-chart:not(:last-child) {
+    border-bottom: 2px solid #303030;
+}
+
+svg text {
+    fill: #FFFFFF !important;
+}
+
+g.nv-axis text, g.nv-legend text {
+    fill: #FFFFFF;
+}
+
+.nvd3 .nv-axis line, .nvd3 .nv-axis path {
+    fill: #616161 !important;
+    stroke: #616161 !important;
+}
+
+.nvtooltip > h3 {
+    background-color: rgba(66, 66, 66, 0.9);
+    border-bottom: 1px solid #616161;
+    color: #e0e0e0;
+}
+
+.nvtooltip {
+    background: rgba(97, 97, 97, 0.9);
+    color: #e0e0e0;
+}
+
+.colspanth {
+    background-color: #000000;
+}
+
+/* Required input elements have a title that begins with "*". This causes
+Group.class.php to add <span class="element-required" to the title, which
+can then be used to style required input here. Example below uses a custom
+text underline, but text-color, background, font etc. could also be used */
+.element-required {
+    color: #a55b5b;
+}
+
+.dropdown-menu .divider {
+    background-color: black;
+}
+
+.panel-title {
+    font-weight: 300;
+    font-size: 20px
+}
+
+.widget-heading-icon .fa {
+    color: var(--button-primary-color)
+}
+
+a.fa, i.fa {
+    font-size: 14px
+}
+.nav-pills li {background: var(--surface-2); margin-left:0px !important; border: 1px solid var(--border-primary-color);} 
+.nav-pills>li:first-child, .nav-pills>li:first-child>a {border-top-left-radius:5px; border-bottom-left-radius: 5px }
+.nav-pills>li:last-child, .nav-pills>li:last-child>a {border-top-right-radius:5px; border-bottom-right-radius: 5px }
+
+.alert-warning .alert-link{ color:#013d6d}
+.checkbox label, .radio label {font-weight:300}
+
+
+/* =========================================================
+ * Diagnostics / Status outputs (pftop, pfInfo, ping, system activity)
+ * Many of these pages render plain <pre>/<textarea> or tables with
+ * default (white) backgrounds. Force them to match the theme.
+ * =======================================================*/
+
+pre,
+code,
+kbd,
+samp,
+tt,
+var,
+textarea,
+textarea.form-control,
+.form-control,
+input.form-control,
+select.form-control {
+  background-color: var(--surface-1) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-secondary-color) !important;
+}
+
+pre {
+  border: 1px solid var(--border-secondary-color) !important;
+  border-radius: 12px !important;
+  padding: 12px 14px !important;
+  overflow: auto;
+}
+
+/* Common "white box" helpers used by some pages/widgets */
+.bg-white,
+.background-white,
+.white-bg,
+.panel-body .bg-white,
+.panel-body .white-bg {
+  background-color: var(--surface-1) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Tables often appear in pftop/pfInfo/system activity views */
+table,
+.table,
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  background-color: transparent !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-secondary-color) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: var(--surface-2) !important;
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: var(--surface-3) !important;
+}
+
+/* jQuery UI widgets sometimes show white panels in diagnostics */
+.ui-widget-content,
+.ui-widget-content a {
+  background: var(--surface-1) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-secondary-color) !important;
+}
+
+/* Make "output" areas (often <pre>) blend into panels */
+.panel .panel-body pre,
+.panel .panel-body textarea {
+  background-color: var(--surface-1) !important;
+}
+
+/* Status monitor graphs/containers sometimes use hardcoded white */
+div[style*="background: #fff"],
+div[style*="background:#fff"],
+div[style*="background: white"],
+div[style*="background:white"] {
+  background-color: var(--surface-1) !important;
+  color: var(--text-primary) !important;
+}
+/* ===========================
+ * Modern polish pack (v3)
+ * - Sidebar/nav refinement
+ * - Tables & badges
+ * - Buttons & form density
+ * - Login page facelift (best-effort selectors)
+ * =========================== */
+
+/* Top navigation / menus */
+.navbar, .navbar-default, .navbar-inverse {
+  background: var(--bg-secondary-color) !important;
+  border-color: var(--border-primary-color) !important;
+  box-shadow: var(--shadow-1);
+}
+.navbar a, .navbar .navbar-nav > li > a, .navbar-brand {
+  color: var(--text-secondary) !important;
+}
+.navbar .navbar-nav > li > a:hover,
+.navbar .navbar-nav > li > a:focus {
+  color: var(--text-primary) !important;
+  background: rgba(255,255,255,.04) !important;
+  border-radius: var(--radius-sm);
+}
+.navbar .navbar-nav > .active > a,
+.navbar .navbar-nav > .active > a:hover,
+.navbar .navbar-nav > .active > a:focus {
+  color: var(--text-primary) !important;
+  background: rgba(22,119,255,.18) !important;
+  border-radius: var(--radius-sm);
+}
+
+/* Left menu / sidebar (pfSense varies by page; keep selectors broad but safe) */
+#mainmenu, .mainmenu, .sidebar, #sidebar {
+  background: var(--bg-secondary-color) !important;
+  border-right: 1px solid var(--border-primary-color) !important;
+}
+#mainmenu a, .mainmenu a, .sidebar a, #sidebar a {
+  color: var(--text-secondary) !important;
+}
+#mainmenu a:hover, .mainmenu a:hover, .sidebar a:hover, #sidebar a:hover {
+  color: var(--text-primary) !important;
+  background: rgba(255,255,255,.04) !important;
+}
+#mainmenu li.active > a, .mainmenu li.active > a, .sidebar li.active > a, #sidebar li.active > a {
+  color: var(--text-primary) !important;
+  background: rgba(22,119,255,.16) !important;
+  border-left: 3px solid var(--button-primary-color) !important;
+}
+
+/* Tabs (UniFi-ish) */
+.nav-tabs {
+  border-bottom: 1px solid var(--border-primary-color) !important;
+}
+.nav-tabs > li > a {
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid transparent !important;
+}
+.nav-tabs > li > a:hover {
+  background: rgba(255,255,255,.04) !important;
+  border-color: var(--border-primary-color) !important;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: var(--text-primary) !important;
+  background: var(--surface-2) !important;
+  border-color: var(--border-primary-color) !important;
+  border-bottom-color: transparent !important;
+}
+
+/* Panels / cards */
+.panel, .panel-default, .panel-body, .panel-heading, .panel-footer {
+  border-color: var(--border-primary-color) !important;
+}
+.panel {
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+.panel-heading {
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0)) !important;
+  color: var(--text-primary) !important;
+}
+.panel-body {
+  background: var(--surface-1) !important;
+}
+
+/* Tables */
+.table {
+  color: var(--text-secondary) !important;
+}
+.table thead th {
+  background: rgba(255,255,255,.03) !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border-primary-color) !important;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background: rgba(255,255,255,.015) !important;
+}
+.table-hover > tbody > tr:hover {
+  background: rgba(22,119,255,.08) !important;
+}
+
+/* Badges / labels */
+.badge, .label {
+  border-radius: 999px !important;
+  padding: .25em .6em !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+}
+.label-success, .badge-success { background: rgba(47,210,125,.18) !important; color: #c9f7de !important; }
+.label-info, .badge-info { background: rgba(47,155,255,.18) !important; color: #cfe9ff !important; }
+.label-warning, .badge-warning { background: rgba(255,176,32,.18) !important; color: #ffe5b7 !important; }
+.label-danger, .badge-danger { background: rgba(255,77,79,.18) !important; color: #ffd0d0 !important; }
+
+/* Buttons */
+.btn {
+  border-radius: var(--radius-sm) !important;
+  border-color: rgba(255,255,255,.10) !important;
+  box-shadow: none !important;
+}
+.btn:hover { filter: brightness(1.03); }
+.btn:focus, .btn:active:focus {
+  outline: none !important;
+  box-shadow: var(--focus-ring) !important;
+}
+.btn-primary {
+  background: var(--button-primary-color) !important;
+  border-color: transparent !important;
+}
+.btn-primary:hover { background: var(--button-primary-hover) !important; }
+
+/* Forms */
+.form-control, input[type="text"], input[type="password"], input[type="number"], select, textarea {
+  background: rgba(255,255,255,.03) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-primary-color) !important;
+  border-radius: var(--radius-sm) !important;
+}
+.form-control:focus, input:focus, select:focus, textarea:focus {
+  outline: none !important;
+  box-shadow: var(--focus-ring) !important;
+  border-color: rgba(22,119,255,.55) !important;
+}
+
+/* Login page (best-effort; pfSense markup can vary slightly by build) */
+body#login, body.login, body[class*="login"] {
+  background: radial-gradient(900px 600px at 20% 10%, rgba(22,119,255,.20), rgba(0,0,0,0) 60%),
+              radial-gradient(700px 500px at 90% 30%, rgba(47,210,125,.10), rgba(0,0,0,0) 55%),
+              var(--bg-primary-color) !important;
+}
+#login, .login, .login-panel, .panel-login, .panel.panel-login, .panel.panel-default.login {
+  background: var(--surface-1) !important;
+  border: 1px solid var(--border-primary-color) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-2) !important;
+}
+#login h1, #login h2, .login h1, .login h2 {
+  color: var(--text-primary) !important;
+}
+/* === v3.1 Fix: ensure text is readable while typing (shell command / dialogs / inputs) === */
+input[type="text"], input[type="search"], input[type="password"], input[type="email"], input[type="url"],
+input[type="number"], input[type="tel"], textarea, select, .form-control,
+.modal input, .modal textarea, .modal select,
+.ui-dialog input, .ui-dialog textarea, .ui-dialog select,
+.bootstrap-dialog input, .bootstrap-dialog textarea, .bootstrap-dialog select,
+#shellcmd input, #shellcmd textarea, #shellcmd select,
+#command, #cmd, #shellcommand, .shellcommand, .command, .commandline {
+  color: var(--text-primary) !important;
+  caret-color: var(--text-primary) !important;
+  background: var(--surface-0) !important;
+  border: 1px solid var(--border-primary-color) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+/* Placeholder/readability */
+input::placeholder, textarea::placeholder, .form-control::placeholder {
+  color: rgba(255,255,255,0.55) !important;
+}
+
+/* Selection highlight */
+input::selection, textarea::selection {
+  background: rgba(0, 180, 216, 0.35) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Disabled / readonly */
+input[disabled], textarea[disabled], select[disabled],
+input[readonly], textarea[readonly] {
+  opacity: 0.75 !important;
+}
+
+/* Focus ring */
+input:focus, textarea:focus, select:focus, .form-control:focus {
+  outline: none !important;
+  border-color: rgba(0, 180, 216, 0.65) !important;
+  box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.18) !important;
+}
+
+
+/* ---- Tooltip/Graph hover box fixes (pfSense RRD/Flot) ---- */
+.flotTip,
+#tooltip,
+div.tooltip,
+.rrdgraph .tooltip,
+.rrdgraph .flotTip {
+  background: rgba(10, 16, 28, 0.92) !important;
+  color: rgba(255,255,255,0.92) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  border-radius: 12px !important;
+  padding: 10px 12px !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.flotTip table,
+.flotTip td,
+.flotTip th {
+  color: rgba(255,255,255,0.92) !important;
+}
+
+.flotTip td {
+  padding: 2px 6px !important;
+}
+
+.flotTip strong,
+.flotTip b {
+  color: rgba(255,255,255,0.95) !important;
+}
+
+/* Keep the little color squares visible but not harsh */
+.flotTip .legendColorBox,
+.flotTip .legendColorBox > div {
+  border-color: rgba(255,255,255,0.18) !important;
+}
+
+/* Bootstrap tooltips/popovers (some pages use them) */
+.tooltip-inner {
+  background-color: rgba(10, 16, 28, 0.92) !important;
+  color: rgba(255,255,255,0.92) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45) !important;
+  padding: 10px 12px !important;
+}
+
+.tooltip.bs-tooltip-top .arrow::before,
+.tooltip.bs-tooltip-bottom .arrow::before,
+.tooltip.bs-tooltip-left .arrow::before,
+.tooltip.bs-tooltip-right .arrow::before {
+  border-top-color: rgba(10, 16, 28, 0.92) !important;
+  border-bottom-color: rgba(10, 16, 28, 0.92) !important;
+  border-left-color: rgba(10, 16, 28, 0.92) !important;
+  border-right-color: rgba(10, 16, 28, 0.92) !important;
+}
+
+.popover {
+  background: rgba(10, 16, 28, 0.92) !important;
+  color: rgba(255,255,255,0.92) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.50) !important;
+}
+
+.popover-header {
+  background: rgba(12, 20, 34, 0.95) !important;
+  color: rgba(255,255,255,0.92) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+}
+
+.popover-body {
+  color: rgba(255,255,255,0.86) !important;
+}
+
+
+/* =========================================================
+ * v3.3 BandwidthD full integration + graph label readability
+ * =======================================================*/
+
+:root {
+  --surface-0: #0c1120;
+}
+
+/* ---------- BandwidthD embedded/framed page integration ---------- */
+iframe,
+.panel iframe,
+.embed-responsive iframe {
+  background: var(--surface-1) !important;
+  border: 1px solid var(--border-primary-color) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+}
+
+/* Common legacy wrappers used by package pages */
+.panel-body > center,
+.panel-body center,
+.panel-body > table,
+.panel-body table {
+  color: var(--text-primary) !important;
+}
+
+/* Best-effort styling for BandwidthD legacy HTML */
+body:has(img[src*="bandwidthd"]),
+body:has(a[href*="bandwidthd"]) {
+  background: var(--surface-1) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Safe broad legacy-page normalization for package outputs */
+body table[border],
+body table[cellpadding],
+body table[cellspacing] {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-secondary-color) !important;
+}
+
+body table[border] th,
+body table[cellpadding] th,
+body table[cellspacing] th {
+  background: rgba(255,255,255,.05) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-secondary-color) !important;
+}
+
+body table[border] td,
+body table[cellpadding] td,
+body table[cellspacing] td {
+  background: rgba(255,255,255,.02) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-secondary-color) !important;
+}
+
+body table[border] tr:nth-child(even) td,
+body table[cellpadding] tr:nth-child(even) td,
+body table[cellspacing] tr:nth-child(even) td {
+  background: rgba(255,255,255,.03) !important;
+}
+
+/* Legacy pages often use deprecated presentational tags */
+body center,
+body font,
+body b,
+body strong,
+body td,
+body th,
+body p,
+body small,
+body li,
+body span {
+  color: inherit !important;
+}
+
+/* Specific visual cleanup for old statistics pages */
+body img {
+  max-width: 100%;
+}
+
+/* ---------- Graph/tooltip readability improvements ---------- */
+/* SVG labels and axes */
+svg text,
+svg tspan,
+.nvd3 text,
+.nvd3 .nv-axis text,
+.nvd3 .nv-legend text,
+.flot-text,
+.flot-text div,
+.jqplot-axis,
+.jqplot-axis-label,
+.jqplot-point-label,
+.rrdgraph text {
+  fill: #f4f7ff !important;
+  color: #f4f7ff !important;
+  text-shadow:
+    0 1px 1px rgba(0,0,0,.95),
+    0 0 4px rgba(0,0,0,.85),
+    0 0 10px rgba(0,0,0,.65) !important;
+}
+
+/* Axis labels rendered as absolutely-positioned divs by Flot */
+.flot-text > div,
+.flot-x-axis div,
+.flot-y-axis div,
+.graph .legend,
+.legend,
+.legendLabel {
+  color: #f4f7ff !important;
+  text-shadow:
+    0 1px 1px rgba(0,0,0,.95),
+    0 0 4px rgba(0,0,0,.85),
+    0 0 10px rgba(0,0,0,.65) !important;
+}
+
+/* Improve readability over busy bar-chart backgrounds */
+.flot-x-axis div,
+.flot-y-axis div,
+.jqplot-axis-label,
+.jqplot-point-label,
+svg .tick text,
+svg .axis text,
+svg .legend text {
+  background: rgba(8, 14, 26, 0.72) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 8px !important;
+  padding: 2px 6px !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,.28) !important;
+}
+
+/* Make hover labels and callouts extra clear */
+.flotTip,
+#tooltip,
+.tooltip-inner,
+.popover,
+.popover-body,
+.rrdgraph .tooltip {
+  text-shadow: none !important;
+}
+
+/* Graph containers with dark overlay to help label contrast */
+.rrdgraph,
+.flot-base,
+.flot-overlay,
+.nvd3,
+svg {
+  border-radius: 12px !important;
+}
+
+/* When labels are drawn over chart area, soften chart backdrop slightly */
+.flot-base,
+.rrdgraph img,
+.rrdgraph canvas,
+canvas.flot-base {
+  filter: brightness(.94) contrast(1.04) !important;
+}
+
+/* Small anchor/link labels common in legacy stats pages */
+body a {
+  color: var(--link-primary-color) !important;
+}
+body a:hover {
+  color: #8ec0ff !important;
+}
+
+
+/* =========================================================
+ * v3.4 - chart legibility + modern tooltip fixes
+ * - Fix bright/washed hover boxes on bar/line charts
+ * - Improve axis label readability on busy backgrounds
+ * - Cover ApexCharts/Chart.js/legacy package graphs
+ * =======================================================*/
+
+/* ApexCharts uses its own tooltip system and was still rendering bright boxes */
+.apexcharts-tooltip,
+.apexcharts-xaxistooltip,
+.apexcharts-yaxistooltip,
+.apexcharts-tooltip-title,
+.apexcharts-menu,
+.apexcharts-toolbar,
+.apexcharts-tooltip-box,
+.apexcharts-tooltip-series-group {
+  background: rgba(10, 16, 28, 0.96) !important;
+  color: rgba(255,255,255,0.94) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.50) !important;
+}
+
+.apexcharts-tooltip *,
+.apexcharts-xaxistooltip *,
+.apexcharts-yaxistooltip *,
+.apexcharts-tooltip-title *,
+.apexcharts-menu * {
+  color: rgba(255,255,255,0.94) !important;
+}
+
+.apexcharts-tooltip {
+  border-radius: 12px !important;
+  padding: 8px 10px !important;
+}
+
+.apexcharts-tooltip-title {
+  background: rgba(255,255,255,0.04) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+  font-weight: 600 !important;
+}
+
+.apexcharts-xaxistooltip,
+.apexcharts-yaxistooltip {
+  border-radius: 10px !important;
+  padding: 6px 10px !important;
+}
+
+.apexcharts-xaxistooltip:before,
+.apexcharts-xaxistooltip:after,
+.apexcharts-yaxistooltip:before,
+.apexcharts-yaxistooltip:after {
+  border-top-color: rgba(10, 16, 28, 0.96) !important;
+  border-bottom-color: rgba(10, 16, 28, 0.96) !important;
+}
+
+/* Axis labels / legends on charts */
+.apexcharts-xaxis text,
+.apexcharts-yaxis text,
+.apexcharts-datalabel,
+.apexcharts-legend-text,
+.apexcharts-text,
+.apexcharts-title-text,
+.apexcharts-subtitle-text,
+.apexcharts-xcrosshairs-text,
+.apexcharts-ycrosshairs-text {
+  fill: #f4f7ff !important;
+  color: #f4f7ff !important;
+  text-shadow:
+    0 1px 1px rgba(0,0,0,.98),
+    0 0 4px rgba(0,0,0,.90),
+    0 0 10px rgba(0,0,0,.72) !important;
+}
+
+/* Make x-axis labels easier to read against bars/lines */
+.apexcharts-xaxis text,
+.apexcharts-yaxis text,
+.apexcharts-legend-text {
+  paint-order: stroke fill !important;
+  stroke: rgba(6, 10, 18, 0.95) !important;
+  stroke-width: 3px !important;
+  stroke-linejoin: round !important;
+}
+
+/* Legacy generic hover cards still turning white on some package pages */
+[role="tooltip"],
+.chart-tooltip,
+.graph-tooltip,
+.c3-tooltip,
+.c3-tooltip-container,
+.morris-hover,
+.morris-hover-row-label,
+.morris-hover-point,
+.chartjs-tooltip,
+div[id*="tooltip"],
+div[class*="tooltip"] {
+  background: rgba(10, 16, 28, 0.96) !important;
+  color: rgba(255,255,255,0.94) !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.50) !important;
+}
+
+[role="tooltip"] *,
+.chart-tooltip *,
+.graph-tooltip *,
+.c3-tooltip *,
+.c3-tooltip-container *,
+.morris-hover *,
+.chartjs-tooltip *,
+div[id*="tooltip"] *,
+div[class*="tooltip"] * {
+  color: rgba(255,255,255,0.94) !important;
+}
+
+/* Keep bar-chart guide labels readable where libraries use plain text nodes */
+svg text,
+svg tspan {
+  paint-order: stroke fill !important;
+  stroke: rgba(6, 10, 18, 0.92) !important;
+  stroke-width: 2.5px !important;
+  stroke-linejoin: round !important;
+}
+
+/* Avoid bright white graph backdrops from embedded legacy images/canvases */
+canvas,
+img[src*="graph"],
+img[src*="rrd"],
+img[src*="bandwidth"],
+img[src*="chart"] {
+  border-radius: 10px !important;
+}
+
+
+/* === v3.5: Interface Statistics date/title strip refinement ===
+   Make the top date/title area match the dark theme better
+   instead of using a bright/washed-looking background. */
+.apexcharts-tooltip,
+.apexcharts-xaxistooltip,
+.apexcharts-yaxistooltip,
+.apexcharts-xaxistooltip-text,
+.apexcharts-yaxistooltip-text,
+.apexcharts-tooltip-title {
+  background: rgba(15, 19, 32, 0.96) !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+
+.apexcharts-tooltip-title,
+.apexcharts-xaxistooltip {
+  background: linear-gradient(180deg, rgba(27,33,53,0.98), rgba(15,19,32,0.98)) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-primary-color) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.55) !important;
+}
+
+/* little arrow under the x-axis tooltip/date marker */
+.apexcharts-xaxistooltip:before,
+.apexcharts-xaxistooltip:after {
+  border-bottom-color: rgba(15, 19, 32, 0.96) !important;
+}
+
+
+/* === v3.6: hard override for ApexCharts tooltip date header === */
+/* Some builds inject theme-light classes and inline styles on the date row. */
+.apexcharts-tooltip.apexcharts-theme-light,
+.apexcharts-xaxistooltip.apexcharts-theme-light,
+.apexcharts-yaxistooltip.apexcharts-theme-light {
+  background: rgba(10, 16, 28, 0.96) !important;
+  color: rgba(255,255,255,0.94) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.42) !important;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title,
+.apexcharts-tooltip-title,
+.apexcharts-xaxistooltip,
+.apexcharts-yaxistooltip,
+.apexcharts-xaxistooltip-text,
+.apexcharts-yaxistooltip-text {
+  background: linear-gradient(180deg, #18233a 0%, #101827 100%) !important;
+  color: #e9edf7 !important;
+  fill: #e9edf7 !important;
+  border-color: rgba(255,255,255,0.10) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.55) !important;
+  -webkit-text-fill-color: #e9edf7 !important;
+  opacity: 1 !important;
+}
+
+/* Keep the body of the tooltip dark as well */
+.apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-series-group,
+.apexcharts-tooltip .apexcharts-tooltip-series-group {
+  background: rgba(10, 16, 28, 0.94) !important;
+  color: #e9edf7 !important;
+}
+
+/* If the library paints the title with inline background-color, this wins visually */
+.apexcharts-tooltip-title[style],
+.apexcharts-xaxistooltip[style],
+.apexcharts-yaxistooltip[style] {
+  background: linear-gradient(180deg, #18233a 0%, #101827 100%) !important;
+  color: #e9edf7 !important;
+  -webkit-text-fill-color: #e9edf7 !important;
+}
+
+/* Roundness and separation so the header looks native to the theme */
+.apexcharts-tooltip {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+.apexcharts-tooltip-title {
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+
+/* === v3.7: firewall rules separator/description labels readability === */
+/* Rule separators / floating note labels used in Firewall > Rules */
+.listing-header,
+.rule-header,
+.separator,
+.separatortext,
+tr.separator td,
+tr.listing-header td,
+tr.rule-header td,
+td.listing-header,
+td.rule-header,
+td.separator,
+span.listing-header,
+span.rule-header,
+span.separatortext,
+.firewall-rule-separator,
+.rules-separator,
+.ruleset-header,
+.rule-description-label,
+.rule-separator-label {
+  background: linear-gradient(180deg, rgba(43, 88, 140, 0.34), rgba(43, 88, 140, 0.22)) !important;
+  color: #eef4ff !important;
+  border: 1px solid rgba(122, 178, 255, 0.25) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.65) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04) !important;
+}
+
+/* Generic inline labels inside firewall tables */
+table td span[style*="background"],
+table td div[style*="background"],
+table td small[style*="background"] {
+  color: #eef4ff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.65) !important;
+}
+
+/* Light yellow legacy labels become dark-theme friendly */
+span[style*="#ffff"],
+span[style*="rgb(255, 255"],
+div[style*="#ffff"],
+div[style*="rgb(255, 255"] {
+  background: linear-gradient(180deg, rgba(43, 88, 140, 0.34), rgba(43, 88, 140, 0.22)) !important;
+  color: #eef4ff !important;
+  border: 1px solid rgba(122, 178, 255, 0.25) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.65) !important;
+  border-radius: 4px !important;
+  padding: 2px 6px !important;
+}
+
+/* A bit more contrast for disabled/grey rows behind labels */
+.table > tbody > tr > td,
+.table-striped > tbody > tr > td {
+  position: relative;
+}
+
+
+/* === v3.8: hard override for firewall rule separator colors === */
+/* pfSense often renders separators as inline spans/divs with inline background colors.
+   Force them into a dark blue chip style. */
+
+table tr td span[style*="background-color"],
+table tr td div[style*="background-color"],
+table tr td span[style*="background:"],
+table tr td div[style*="background:"] {
+  background: linear-gradient(180deg, rgba(29, 48, 82, 0.96), rgba(20, 33, 58, 0.96)) !important;
+  color: #eef4ff !important;
+  border: 1px solid rgba(106, 159, 255, 0.34) !important;
+  border-radius: 4px !important;
+  padding: 2px 6px !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.72) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 1px 6px rgba(0,0,0,.18) !important;
+  -webkit-text-fill-color: #eef4ff !important;
+}
+
+/* Directly target common legacy yellow/pink separator colors */
+table tr td span[style*="#ffff99"],
+table tr td span[style*="#FFFF99"],
+table tr td span[style*="rgb(255, 255, 153)"],
+table tr td div[style*="#ffff99"],
+table tr td div[style*="#FFFF99"],
+table tr td div[style*="rgb(255, 255, 153)"],
+table tr td span[style*="#ffcccc"],
+table tr td span[style*="#FFCCCC"],
+table tr td span[style*="rgb(255, 204, 204)"],
+table tr td div[style*="#ffcccc"],
+table tr td div[style*="#FFCCCC"],
+table tr td div[style*="rgb(255, 204, 204)"] {
+  background: linear-gradient(180deg, rgba(29, 48, 82, 0.98), rgba(20, 33, 58, 0.98)) !important;
+  color: #f3f7ff !important;
+  border: 1px solid rgba(116, 169, 255, 0.40) !important;
+  -webkit-text-fill-color: #f3f7ff !important;
+}
+
+/* Keep links inside separators readable */
+table tr td span[style*="background-color"] a,
+table tr td div[style*="background-color"] a,
+table tr td span[style*="background:"] a,
+table tr td div[style*="background:"] a {
+  color: #f3f7ff !important;
+  text-decoration: none !important;
+}
+
+/* If separator text is wrapped in font tags or nested spans */
+table tr td span[style*="background"] *,
+table tr td div[style*="background"] * {
+  color: #f3f7ff !important;
+  -webkit-text-fill-color: #f3f7ff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.72) !important;
+}
+
+
+/* === v3.9: remap pfSense rule separator preset colors to dark-theme palette === */
+/* pfSense separator presets are commonly stored as inline background colors.
+   Map those preset colors to nicer dark-theme chips while preserving distinction. */
+
+/* BLUE preset */
+table tr td span[style*="#9fc6e7"],
+table tr td span[style*="#9FC6E7"],
+table tr td span[style*="rgb(159, 198, 231)"],
+table tr td div[style*="#9fc6e7"],
+table tr td div[style*="#9FC6E7"],
+table tr td div[style*="rgb(159, 198, 231)"] {
+  background: linear-gradient(180deg, rgba(29, 48, 82, 0.98), rgba(20, 33, 58, 0.98)) !important;
+  border: 1px solid rgba(106, 159, 255, 0.40) !important;
+  color: #f3f7ff !important;
+  -webkit-text-fill-color: #f3f7ff !important;
+}
+
+/* RED preset */
+table tr td span[style*="#f4cccc"],
+table tr td span[style*="#F4CCCC"],
+table tr td span[style*="rgb(244, 204, 204)"],
+table tr td div[style*="#f4cccc"],
+table tr td div[style*="#F4CCCC"],
+table tr td div[style*="rgb(244, 204, 204)"],
+table tr td span[style*="#ffcccc"],
+table tr td span[style*="#FFCCCC"],
+table tr td span[style*="rgb(255, 204, 204)"],
+table tr td div[style*="#ffcccc"],
+table tr td div[style*="#FFCCCC"],
+table tr td div[style*="rgb(255, 204, 204)"] {
+  background: linear-gradient(180deg, rgba(88, 39, 53, 0.98), rgba(59, 24, 35, 0.98)) !important;
+  border: 1px solid rgba(214, 118, 140, 0.34) !important;
+  color: #fff0f3 !important;
+  -webkit-text-fill-color: #fff0f3 !important;
+}
+
+/* GREEN preset */
+table tr td span[style*="#d9ead3"],
+table tr td span[style*="#D9EAD3"],
+table tr td span[style*="rgb(217, 234, 211)"],
+table tr td div[style*="#d9ead3"],
+table tr td div[style*="#D9EAD3"],
+table tr td div[style*="rgb(217, 234, 211)"] {
+  background: linear-gradient(180deg, rgba(27, 70, 65, 0.98), rgba(18, 47, 44, 0.98)) !important;
+  border: 1px solid rgba(97, 191, 174, 0.34) !important;
+  color: #ebfffb !important;
+  -webkit-text-fill-color: #ebfffb !important;
+}
+
+/* YELLOW preset */
+table tr td span[style*="#fff2cc"],
+table tr td span[style*="#FFF2CC"],
+table tr td span[style*="rgb(255, 242, 204)"],
+table tr td div[style*="#fff2cc"],
+table tr td div[style*="#FFF2CC"],
+table tr td div[style*="rgb(255, 242, 204)"],
+table tr td span[style*="#ffff99"],
+table tr td span[style*="#FFFF99"],
+table tr td span[style*="rgb(255, 255, 153)"],
+table tr td div[style*="#ffff99"],
+table tr td div[style*="#FFFF99"],
+table tr td div[style*="rgb(255, 255, 153)"] {
+  background: linear-gradient(180deg, rgba(62, 75, 30, 0.98), rgba(41, 50, 19, 0.98)) !important;
+  border: 1px solid rgba(184, 202, 91, 0.34) !important;
+  color: #f8ffe6 !important;
+  -webkit-text-fill-color: #f8ffe6 !important;
+}
+
+/* Common finish for all remapped separator chips */
+table tr td span[style*="#9fc6e7"],
+table tr td span[style*="#9FC6E7"],
+table tr td span[style*="rgb(159, 198, 231)"],
+table tr td div[style*="#9fc6e7"],
+table tr td div[style*="#9FC6E7"],
+table tr td div[style*="rgb(159, 198, 231)"],
+table tr td span[style*="#f4cccc"],
+table tr td span[style*="#F4CCCC"],
+table tr td span[style*="rgb(244, 204, 204)"],
+table tr td div[style*="#f4cccc"],
+table tr td div[style*="#F4CCCC"],
+table tr td div[style*="rgb(244, 204, 204)"],
+table tr td span[style*="#ffcccc"],
+table tr td span[style*="#FFCCCC"],
+table tr td span[style*="rgb(255, 204, 204)"],
+table tr td div[style*="#ffcccc"],
+table tr td div[style*="#FFCCCC"],
+table tr td div[style*="rgb(255, 204, 204)"],
+table tr td span[style*="#d9ead3"],
+table tr td span[style*="#D9EAD3"],
+table tr td span[style*="rgb(217, 234, 211)"],
+table tr td div[style*="#d9ead3"],
+table tr td div[style*="#D9EAD3"],
+table tr td div[style*="rgb(217, 234, 211)"],
+table tr td span[style*="#fff2cc"],
+table tr td span[style*="#FFF2CC"],
+table tr td span[style*="rgb(255, 242, 204)"],
+table tr td div[style*="#fff2cc"],
+table tr td div[style*="#FFF2CC"],
+table tr td div[style*="rgb(255, 242, 204)"],
+table tr td span[style*="#ffff99"],
+table tr td span[style*="#FFFF99"],
+table tr td span[style*="rgb(255, 255, 153)"],
+table tr td div[style*="#ffff99"],
+table tr td div[style*="#FFFF99"],
+table tr td div[style*="rgb(255, 255, 153)"] {
+  border-radius: 4px !important;
+  padding: 2px 6px !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.72) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 1px 6px rgba(0,0,0,.18) !important;
+}
+
+table tr td span[style*="#9fc6e7"] *,
+table tr td span[style*="#9FC6E7"] *,
+table tr td span[style*="rgb(159, 198, 231)"] *,
+table tr td div[style*="#9fc6e7"] *,
+table tr td div[style*="#9FC6E7"] *,
+table tr td div[style*="rgb(159, 198, 231)"] *,
+table tr td span[style*="#f4cccc"] *,
+table tr td span[style*="#F4CCCC"] *,
+table tr td span[style*="rgb(244, 204, 204)"] *,
+table tr td div[style*="#f4cccc"] *,
+table tr td div[style*="#F4CCCC"] *,
+table tr td div[style*="rgb(244, 204, 204)"] *,
+table tr td span[style*="#ffcccc"] *,
+table tr td span[style*="#FFCCCC"] *,
+table tr td span[style*="rgb(255, 204, 204)"] *,
+table tr td div[style*="#ffcccc"] *,
+table tr td div[style*="#FFCCCC"] *,
+table tr td div[style*="rgb(255, 204, 204)"] *,
+table tr td span[style*="#d9ead3"] *,
+table tr td span[style*="#D9EAD3"] *,
+table tr td span[style*="rgb(217, 234, 211)"] *,
+table tr td div[style*="#d9ead3"] *,
+table tr td div[style*="#D9EAD3"] *,
+table tr td div[style*="rgb(217, 234, 211)"] *,
+table tr td span[style*="#fff2cc"] *,
+table tr td span[style*="#FFF2CC"] *,
+table tr td span[style*="rgb(255, 242, 204)"] *,
+table tr td div[style*="#fff2cc"] *,
+table tr td div[style*="#FFF2CC"] *,
+table tr td div[style*="rgb(255, 242, 204)"] *,
+table tr td span[style*="#ffff99"] *,
+table tr td span[style*="#FFFF99"] *,
+table tr td span[style*="rgb(255, 255, 153)"] *,
+table tr td div[style*="#ffff99"] *,
+table tr td div[style*="#FFFF99"] *,
+table tr td div[style*="rgb(255, 255, 153)"] * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+
+/* === v4.0: Dynamic DNS status IP health coloring === */
+/* Make alive/current IPs look pleasantly green and dead/invalid IPs red. */
+
+/* Common status classes / badges if present */
+.text-success,
+.label-success,
+.badge-success,
+.status-up,
+.online,
+.up,
+.ok {
+  color: #7ee0a4 !important;
+}
+
+.text-danger,
+.label-danger,
+.badge-danger,
+.status-down,
+.offline,
+.down,
+.error {
+  color: #ff8f96 !important;
+}
+
+/* Dynamic DNS widget/table: Cached IP column */
+#dyn_dns_status table td:nth-child(4),
+#dynamicdns table td:nth-child(4),
+#ddnsstatus table td:nth-child(4),
+.widget[id*="dyn"] table td:nth-child(4) {
+  font-weight: 600;
+}
+
+
+/* Fallback using title/inline status markers if the markup uses classes */
+td.text-success,
+td .text-success,
+span.text-success,
+td.text-danger,
+td .text-danger,
+span.text-danger {
+  font-weight: 600 !important;
+}
+
+/* Pure CSS text-content based fallback for common Dynamic DNS table values.
+   Since CSS cannot truly compare text, we target the common dead value via attributes/styles/classes,
+   and style healthy rows via known success classes plus a general green accent on cached IP cells
+   that are not flagged as danger by the app. */
+#dyn_dns_status table tr td:nth-child(4),
+#dynamicdns table tr td:nth-child(4),
+#ddnsstatus table tr td:nth-child(4),
+table tr td.cached-ip,
+table tr td.ipcache {
+  color: #7ee0a4 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.45) !important;
+}
+
+/* Force explicitly bad cells red when the application flags them */
+#dyn_dns_status table tr.danger td:nth-child(4),
+#dynamicdns table tr.danger td:nth-child(4),
+#ddnsstatus table tr.danger td:nth-child(4),
+#dyn_dns_status table tr.text-danger td:nth-child(4),
+#dynamicdns table tr.text-danger td:nth-child(4),
+#ddnsstatus table tr.text-danger td:nth-child(4),
+table tr.danger td.cached-ip,
+table tr.text-danger td.cached-ip,
+td.cached-ip.text-danger,
+td.ipcache.text-danger,
+td[title*="0.0.0.0"],
+span[title*="0.0.0.0"] {
+  color: #ff8f96 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.45) !important;
+}
+
+/* Explicit common dead placeholders */
+td.dead-ip,
+span.dead-ip,
+td.ip-dead,
+span.ip-dead,
+td.status-dead,
+span.status-dead {
+  color: #ff8f96 !important;
+}
+
+/* Explicit common live placeholders */
+td.live-ip,
+span.live-ip,
+td.ip-live,
+span.ip-live,
+td.status-live,
+span.status-live {
+  color: #7ee0a4 !important;
+}
+
+
+/* === v4.1: close button / dismiss icon refinement === */
+/* Make dismiss/close buttons match the themed circular icon style */
+button.close,
+.close,
+.alert .close,
+.alert-dismissible .close,
+.modal-header .close,
+.panel .close,
+button[data-dismiss="alert"],
+button[data-dismiss="modal"] {
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  background: linear-gradient(180deg, rgba(20,33,58,.92), rgba(14,22,40,.92)) !important;
+  color: #f4f7ff !important;
+  opacity: 1 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 4px 12px rgba(0,0,0,.22) !important;
+  text-shadow: none !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  -webkit-text-fill-color: #f4f7ff !important;
+}
+
+button.close:hover,
+.close:hover,
+.alert .close:hover,
+.alert-dismissible .close:hover,
+.modal-header .close:hover,
+.panel .close:hover,
+button[data-dismiss="alert"]:hover,
+button[data-dismiss="modal"]:hover {
+  background: linear-gradient(180deg, rgba(32,49,83,.96), rgba(18,29,49,.96)) !important;
+  color: #ffffff !important;
+  border-color: rgba(122,178,255,.28) !important;
+}
+
+button.close:focus,
+.close:focus,
+.alert .close:focus,
+.alert-dismissible .close:focus,
+.modal-header .close:focus,
+.panel .close:focus,
+button[data-dismiss="alert"]:focus,
+button[data-dismiss="modal"]:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(22,119,255,.22), inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+
+/* Neutralize legacy tan/cream close chips */
+button.close span,
+.close span {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+
+/* === v4.2: status coloring for Gateways and WireGuard widgets === */
+
+/* Pleasant semantic colors consistent with dark theme */
+:root {
+  --status-green: #7ee0a4;
+  --status-red: #ff8f96;
+  --status-green-bg: rgba(47,210,125,.12);
+  --status-red-bg: rgba(255,77,79,.12);
+}
+
+/* Generic text helpers */
+.status-up,
+.status-online,
+.online,
+.text-success,
+.gateway-online,
+.wg-online,
+.wireguard-online {
+  color: var(--status-green) !important;
+  -webkit-text-fill-color: var(--status-green) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+}
+
+.status-down,
+.status-offline,
+.offline,
+.text-danger,
+.gateway-offline,
+.wg-offline,
+.wireguard-offline,
+.packetloss,
+.loss-100 {
+  color: var(--status-red) !important;
+  -webkit-text-fill-color: var(--status-red) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+}
+
+/* Gateways widget/table */
+table tr td:has(> span.status-online),
+table tr td:has(> span.online),
+table tr td:has(> .gateway-online) {
+  color: var(--status-green) !important;
+}
+
+table tr td:has(> span.status-offline),
+table tr td:has(> span.offline),
+table tr td:has(> .gateway-offline),
+table tr td:has(> .packetloss) {
+  color: var(--status-red) !important;
+}
+
+/* Common Gateway status text nodes */
+#gateways table td:nth-child(6),
+#gwtable table td:nth-child(6) {
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+}
+
+/* If app flags rows/cells */
+#gateways table tr.success td:nth-child(6),
+#gwtable table tr.success td:nth-child(6),
+table tr.success td.gateway-status,
+td.gateway-status.success {
+  color: var(--status-green) !important;
+}
+
+#gateways table tr.danger td:nth-child(6),
+#gwtable table tr.danger td:nth-child(6),
+table tr.danger td.gateway-status,
+td.gateway-status.danger,
+td.gateway-status.packetloss {
+  color: var(--status-red) !important;
+}
+
+/* WireGuard: Active Peers column */
+#wireguard table td:nth-child(3) {
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+}
+
+/* Explicit helper classes if present */
+td.active-peers-zero,
+span.active-peers-zero,
+td.peers-zero,
+span.peers-zero {
+  color: var(--status-red) !important;
+}
+
+td.active-peers-up,
+span.active-peers-up,
+td.peers-up,
+span.peers-up {
+  color: var(--status-green) !important;
+}
+
+/* Also color common numeric badges */
+.badge.peers-zero,
+.label.peers-zero {
+  color: #ffd7db !important;
+  background: var(--status-red-bg) !important;
+  border-color: rgba(255,77,79,.22) !important;
+}
+
+.badge.peers-up,
+.label.peers-up {
+  color: #d7ffea !important;
+  background: var(--status-green-bg) !important;
+  border-color: rgba(47,210,125,.22) !important;
+}
+
+
+/* === v4.3: exact fixes from inspected HTML for Gateways and WireGuard === */
+
+/* Gateways widget uses semantic classes directly on the status <td> */
+#gateways-0-gwtblbody td.bg-success,
+#gateways-0-gwtblbody .bg-success,
+tbody[id^="gateways-"][id$="-gwtblbody"] td.bg-success,
+tbody[id^="gateways-"][id$="-gwtblbody"] .bg-success {
+  background: rgba(47,210,125,.14) !important;
+  color: #7ee0a4 !important;
+  -webkit-text-fill-color: #7ee0a4 !important;
+  border-left: 1px solid rgba(47,210,125,.22) !important;
+  border-right: 1px solid rgba(47,210,125,.22) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+  font-weight: 700 !important;
+}
+
+#gateways-0-gwtblbody td.bg-danger,
+#gateways-0-gwtblbody .bg-danger,
+tbody[id^="gateways-"][id$="-gwtblbody"] td.bg-danger,
+tbody[id^="gateways-"][id$="-gwtblbody"] .bg-danger {
+  background: rgba(255,77,79,.14) !important;
+  color: #ff8f96 !important;
+  -webkit-text-fill-color: #ff8f96 !important;
+  border-left: 1px solid rgba(255,77,79,.22) !important;
+  border-right: 1px solid rgba(255,77,79,.22) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+  font-weight: 700 !important;
+}
+
+/* WireGuard widget: Active Peers is the 3rd td inside tbody#wireguard-0 */
+tbody[id^="wireguard-"] tr > td:nth-child(3) {
+  font-weight: 700 !important;
+}
+
+/* Zero peers -> red */
+tbody[id^="wireguard-"] tr > td:nth-child(3):empty,
+tbody[id^="wireguard-"] tr > td:nth-child(3)[data-peers="0"] {
+  color: #ff8f96 !important;
+  -webkit-text-fill-color: #ff8f96 !important;
+}
+
+/* Since HTML is plain text, style the whole column red by default, then allow manual green helper class if present */
+tbody[id^="wireguard-"] tr > td:nth-child(3) {
+  color: #ff8f96 !important;
+  -webkit-text-fill-color: #ff8f96 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+}
+
+/* If pfSense or future markup adds a helper class for active peers, make it green */
+tbody[id^="wireguard-"] tr > td:nth-child(3).bg-success,
+tbody[id^="wireguard-"] tr > td:nth-child(3).text-success,
+tbody[id^="wireguard-"] tr.peers-up > td:nth-child(3) {
+  color: #7ee0a4 !important;
+  -webkit-text-fill-color: #7ee0a4 !important;
+}
+
+/* Optional JS-free visual hint for current 0 peers state */
+tbody[id^="wireguard-"] tr > td:nth-child(3) {
+  background: rgba(255,77,79,.10) !important;
+  border-radius: 6px !important;
+}
+
+
+/* === v4.4: WireGuard Active Peers simplified styling === */
+/* Keep Active Peers in a clean theme-blue, without red/green logic or text shadow */
+tbody[id^="wireguard-"] tr > td:nth-child(3) {
+  color: #5aa3ff !important;
+  -webkit-text-fill-color: #5aa3ff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  font-weight: 700 !important;
+  border-radius: 0 !important;
+}
+
+
+/* === v4.5: alerts, disabled buttons, active tabs and misc readability cleanup === */
+
+/* 1) Warning/info/empty-state banners that were looking muddy brown */
+.alert,
+.alert-warning,
+.alert-info,
+.alert-danger,
+.alert-success,
+.alert-dismissible,
+.bs-callout,
+.message-default,
+.message-info,
+.message-warning,
+.message-error,
+.message-success {
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
+}
+
+/* Warning / neutral notices like "No OpenVPN instances defined", "IPsec is disabled", etc */
+.alert-warning,
+.message-warning,
+div[role="alert"].alert-warning,
+.panel-body .alert-warning {
+  background: linear-gradient(180deg, rgba(96, 74, 26, .34), rgba(72, 56, 20, .28)) !important;
+  border: 1px solid rgba(255, 190, 70, .26) !important;
+  color: #f3e3b0 !important;
+}
+.alert-warning *,
+.message-warning * {
+  color: #f3e3b0 !important;
+  -webkit-text-fill-color: #f3e3b0 !important;
+}
+.alert-warning a,
+.message-warning a {
+  color: #8fc2ff !important;
+  font-weight: 600 !important;
+}
+
+/* Error banners like "activation token must be provided" */
+.alert-danger,
+.message-error,
+.has-error .help-block,
+.panel-body .alert-danger {
+  background: linear-gradient(180deg, rgba(95, 34, 42, .20), rgba(70, 24, 31, .18)) !important;
+  border: 1px solid rgba(255, 122, 138, .22) !important;
+  color: #ffb5be !important;
+}
+.alert-danger *,
+.message-error * {
+  color: #ffb5be !important;
+  -webkit-text-fill-color: #ffb5be !important;
+}
+.alert-danger a,
+.message-error a {
+  color: #9ccaff !important;
+  font-weight: 600 !important;
+}
+
+/* Success banner */
+.alert-success,
+.message-success {
+  background: linear-gradient(180deg, rgba(26, 86, 66, .24), rgba(18, 60, 46, .20)) !important;
+  border: 1px solid rgba(71, 213, 153, .22) !important;
+  color: #aef0cd !important;
+}
+.alert-success *,
+.message-success * {
+  color: #aef0cd !important;
+  -webkit-text-fill-color: #aef0cd !important;
+}
+
+/* Info banner */
+.alert-info,
+.message-info {
+  background: linear-gradient(180deg, rgba(30, 72, 118, .24), rgba(20, 50, 84, .20)) !important;
+  border: 1px solid rgba(108, 170, 255, .22) !important;
+  color: #c7e1ff !important;
+}
+.alert-info *,
+.message-info * {
+  color: #c7e1ff !important;
+  -webkit-text-fill-color: #c7e1ff !important;
+}
+.alert-info a,
+.message-info a {
+  color: #9fc8ff !important;
+  font-weight: 600 !important;
+}
+
+/* 2) Make close icon on alerts consistent */
+.alert .close,
+.alert-dismissible .close {
+  background: linear-gradient(180deg, rgba(22, 35, 61, .98), rgba(14, 22, 40, .98)) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  color: #f4f7ff !important;
+}
+
+/* 3) Disabled / faded buttons like "Learn more" or "Show All Configured Leases" */
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn,
+.btn-default.disabled,
+.btn-default[disabled],
+.btn-primary.disabled,
+.btn-primary[disabled],
+.btn-info.disabled,
+.btn-info[disabled],
+.btn-success.disabled,
+.btn-success[disabled],
+.btn-warning.disabled,
+.btn-warning[disabled],
+.btn-danger.disabled,
+.btn-danger[disabled] {
+  opacity: 1 !important;
+  color: #c9dbf8 !important;
+  -webkit-text-fill-color: #c9dbf8 !important;
+  border-color: rgba(126, 176, 255, .20) !important;
+  filter: saturate(.95) !important;
+}
+.btn.disabled *,
+.btn[disabled] * {
+  color: #c9dbf8 !important;
+  -webkit-text-fill-color: #c9dbf8 !important;
+}
+.btn.disabled:hover,
+.btn[disabled]:hover {
+  color: #deebff !important;
+}
+
+/* Button polish for dangerous actions */
+.btn-danger {
+  background: linear-gradient(180deg, rgba(210, 63, 72, .96), rgba(166, 39, 50, .96)) !important;
+  border: 1px solid rgba(255, 130, 140, .22) !important;
+  color: #fff2f4 !important;
+}
+.btn-danger:hover {
+  background: linear-gradient(180deg, rgba(225, 78, 88, .98), rgba(180, 49, 60, .98)) !important;
+}
+
+/* 4) Active tabs text was too dim */
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus,
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  color: #d8e9ff !important;
+  -webkit-text-fill-color: #d8e9ff !important;
+  text-shadow: none !important;
+}
+
+/* Make non-active tabs readable too */
+.nav-tabs > li > a,
+.nav-pills > li > a {
+  color: #79b4ff !important;
+  -webkit-text-fill-color: #79b4ff !important;
+}
+.nav-tabs > li > a:hover,
+.nav-pills > li > a:hover {
+  color: #d2e6ff !important;
+  -webkit-text-fill-color: #d2e6ff !important;
+}
+
+/* 5) Broad fix for muddy brown/cream content boxes and explanatory blocks */
+.panel-body > .well,
+.well,
+.help-block.well,
+div[style*="background-color: rgb(97, 76, 37)"],
+div[style*="background: rgb(97, 76, 37)"],
+div[style*="background-color:#614c25"],
+div[style*="background:#614c25"] {
+  background: linear-gradient(180deg, rgba(43, 54, 82, .28), rgba(25, 34, 56, .22)) !important;
+  border: 1px solid rgba(113, 156, 230, .18) !important;
+  color: #cfddf5 !important;
+}
+.panel-body > .well *,
+.well * {
+  color: #cfddf5 !important;
+  -webkit-text-fill-color: #cfddf5 !important;
+}
+
+/* 6) Improve plain text readability inside notices/headers */
+.alert p,
+.alert li,
+.alert div,
+.well p,
+.well li,
+.well div {
+  text-shadow: none !important;
+}
+
+/* 7) Slightly brighter panel titles/headers */
+.panel-title,
+.panel-heading,
+.widget .panel-heading {
+  color: #d7e7ff !important;
+  -webkit-text-fill-color: #d7e7ff !important;
+}
+
+
+/* === v4.6: make explanatory warning/info boxes blend better with the pfSense dark theme === */
+/* Pages like Test Port, OpenVPN/IPsec empty-state, CARP notices, etc. */
+.alert-warning,
+.message-warning,
+.panel-body .alert-warning,
+.panel-body .message-warning,
+.well.alert-warning,
+div[role="alert"].alert-warning {
+  background: linear-gradient(180deg, rgba(24,37,64,.92), rgba(16,25,43,.92)) !important;
+  border: 1px solid rgba(74, 125, 210, .26) !important;
+  color: #d7e7ff !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,.20) !important;
+}
+
+.alert-warning *,
+.message-warning *,
+.panel-body .alert-warning *,
+.panel-body .message-warning * {
+  color: #d7e7ff !important;
+  -webkit-text-fill-color: #d7e7ff !important;
+  text-shadow: none !important;
+}
+
+.alert-warning a,
+.message-warning a,
+.panel-body .alert-warning a,
+.panel-body .message-warning a {
+  color: #79b4ff !important;
+  font-weight: 600 !important;
+}
+
+.alert-warning .close,
+.message-warning .close {
+  background: linear-gradient(180deg, rgba(22,35,61,.98), rgba(14,22,40,.98)) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  color: #f4f7ff !important;
+}
+
+/* Generic descriptive blocks / brown helper boxes */
+.well,
+.panel-body > .well,
+.help-block.well,
+div[style*="background-color: rgb(97, 76, 37)"],
+div[style*="background: rgb(97, 76, 37)"],
+div[style*="background-color:#614c25"],
+div[style*="background:#614c25"] {
+  background: linear-gradient(180deg, rgba(24,37,64,.90), rgba(16,25,43,.90)) !important;
+  border: 1px solid rgba(74, 125, 210, .22) !important;
+  color: #cfddf5 !important;
+}
+
+.well *,
+.panel-body > .well *,
+.help-block.well * {
+  color: #cfddf5 !important;
+  -webkit-text-fill-color: #cfddf5 !important;
+  text-shadow: none !important;
+}
+
+
+/* ==========================================================================
+   v4.7 — auditoría de accesibilidad y coherencia (2026-11-10)
+   Objetivo: WCAG 2.1 AA (texto >= 4.5:1, foco visible) en todas las páginas.
+   Los selectores :contains() de v4.6 (inválidos en CSS) se quitaron arriba.
+   ========================================================================== */
+
+:root {
+  /* azul primario más oscuro: blanco encima da 5.2:1 (antes 4.1:1) */
+  --button-primary-color: #0f66e6;
+  --button-primary-hover: #0b57c9;
+  --button-info-color: #0b74d1;
+  --button-info-hover: #095fae;
+  --button-warning-color: #ffa000;
+  --button-warning-text: #1f1300;
+  --focus-outline: #8ec2ff;
+  --focus-ring: 0 0 0 3px rgba(142,194,255,.45);
+}
+
+/* --- 1. Botones: el texto de <a class="btn"> heredaba el azul de los enlaces --- */
+.btn-primary, a.btn-primary, .btn-primary:hover, .btn-primary:focus,
+.btn-success, a.btn-success, .btn-success:hover, .btn-success:focus,
+.btn-info, a.btn-info, .btn-info:hover, .btn-info:focus {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+.btn-primary .fa, .btn-success .fa, .btn-info .fa,
+.btn-primary .fa-solid, .btn-success .fa-solid, .btn-info .fa-solid,
+.btn-primary .fa-regular, .btn-success .fa-regular, .btn-info .fa-regular {
+  color: inherit !important;
+}
+.btn-primary, .btn-success {
+  background: var(--button-primary-color) !important;
+  border-color: transparent !important;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active,
+.btn-success:hover, .btn-success:focus, .btn-success:active {
+  background: var(--button-primary-hover) !important;
+}
+.btn-info {
+  background: var(--button-info-color) !important;
+  border-color: transparent !important;
+}
+.btn-info:hover, .btn-info:focus, .btn-info:active {
+  background: var(--button-info-hover) !important;
+}
+/* naranja: texto oscuro (8.9:1) en vez de blanco (2.0:1) */
+.btn-warning, a.btn-warning, .btn-warning:hover, .btn-warning:focus, .btn-warning:active,
+.btn-warning .fa, .btn-warning .fa-solid, .btn-warning .fa-regular {
+  background-color: var(--button-warning-color);
+  color: var(--button-warning-text) !important;
+  -webkit-text-fill-color: var(--button-warning-text) !important;
+  text-shadow: none !important;
+}
+.btn-warning .fa, .btn-warning .fa-solid, .btn-warning .fa-regular { background-color: transparent; }
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active { background-color: #ffb333 !important; }
+.btn-danger, a.btn-danger {
+  background: linear-gradient(180deg, #c7353f, #a62732) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+.btn-danger:hover, .btn-danger:focus {
+  background: linear-gradient(180deg, #b52d37, #93212b) !important;
+}
+/* los botones deshabilitados conservan el aspecto apagado de v4.6 */
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn,
+a.btn.disabled, .btn.disabled .fa, .btn[disabled] .fa {
+  color: #c9dbf8 !important;
+  -webkit-text-fill-color: #c9dbf8 !important;
+}
+.btn-warning.disabled, .btn-warning[disabled] {
+  background-color: #6b5320 !important;
+}
+
+/* --- 2. Pestaña activa: blanco sobre el azul primario (5.2:1, antes 3.6:1) --- */
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus,
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: var(--button-primary-color) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+/* --- 3. Separadores de reglas (Firewall > Rules / NAT): el <span> conservaba el
+        pastel de pfSense con texto claro encima. Ahora la fila lleva un tinte
+        oscuro del color elegido y una franja a la izquierda. --- */
+tr.separator td span.bg-info, tr.separator td span.bg-warning,
+tr.separator td span.bg-danger, tr.separator td span.bg-success,
+tr.separator td span.bg-primary {
+  background: transparent !important;
+  color: inherit !important;
+  -webkit-text-fill-color: currentcolor !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-weight: 600;
+}
+tr.separator td.bg-info    { background: rgba(47,155,255,.20) !important; border-color: rgba(47,155,255,.35) !important; color: #e6f2ff !important; }
+tr.separator td.bg-warning { background: rgba(255,176,32,.18) !important; border-color: rgba(255,176,32,.35) !important; color: #fff3d6 !important; }
+tr.separator td.bg-danger  { background: rgba(255,77,79,.20) !important;  border-color: rgba(255,77,79,.35) !important;  color: #ffe4e4 !important; }
+tr.separator td.bg-success { background: rgba(47,210,125,.16) !important; border-color: rgba(47,210,125,.32) !important; color: #dcfbea !important; }
+tr.separator td.bg-info:first-child    { box-shadow: inset 4px 0 0 var(--info) !important; }
+tr.separator td.bg-warning:first-child { box-shadow: inset 4px 0 0 var(--warning) !important; }
+tr.separator td.bg-danger:first-child  { box-shadow: inset 4px 0 0 var(--danger) !important; }
+tr.separator td.bg-success:first-child { box-shadow: inset 4px 0 0 var(--success) !important; }
+
+/* --- 4. Bloques .bg-* fuera de los separadores (avisos de paquetes): pfSense les
+        pone texto azul/negro pensado para fondo claro --- */
+.panel-body.bg-info, div.bg-info, p.bg-info,
+.panel-body.bg-warning, div.bg-warning, p.bg-warning,
+.panel-body.bg-danger, div.bg-danger, p.bg-danger,
+.panel-body.bg-success, div.bg-success, p.bg-success {
+  color: var(--text-primary) !important;
+}
+.panel-body.bg-info, div.bg-info, p.bg-info { background-color: rgba(47,155,255,.12) !important; }
+.text-info { color: #7cc4ff !important; }
+
+/* --- 5. Separador "/" entre IP y máscara: quedaba gris claro (#eee) --- */
+.input-group-addon, .input-group-addon.input-group-inbetween {
+  background-color: var(--surface-2) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-primary-color) !important;
+}
+
+/* --- 6. Deslizadores (Status > Traffic Graph): fondo blanco --- */
+input[type="range"], input.form-range {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none;
+  accent-color: var(--button-primary-color);
+}
+
+/* --- 7. pfBlockerNG: filas y campos con colores claros en línea --- */
+tr[style*="#B8B8B8" i] { background-color: rgba(255,255,255,.07) !important; }
+tr[style*="#A0B8A0" i] { background-color: rgba(47,210,125,.14) !important; }
+input[style*="#FFFF00" i], span[style*="#FFFF00" i] {
+  background-color: rgba(255,176,32,.20) !important;
+  border-color: var(--warning) !important;
+  color: #fff3d6 !important;
+  -webkit-text-fill-color: #fff3d6 !important;
+}
+
+/* --- 8. Etiquetas y texto de ayuda con poco contraste --- */
+.label-default { background-color: #5b6478 !important; color: #fff !important; }
+.help-block, ul.help-block > li, span.help-block { color: var(--text-muted); }
+
+/* --- 9. Foco de teclado visible (WCAG 2.4.7): v4.6 quitaba el contorno y dejaba
+        un halo casi invisible. Solo aparece al navegar con teclado. --- */
+a:focus-visible, button:focus-visible, .btn:focus-visible, [tabindex]:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible,
+.nav > li > a:focus-visible, .dropdown-menu > li > a:focus-visible,
+.close:focus-visible, input[type="checkbox"]:focus-visible, input[type="radio"]:focus-visible {
+  outline: 2px solid var(--focus-outline) !important;
+  outline-offset: 2px !important;
+}
+input:focus, textarea:focus, select:focus, .form-control:focus {
+  border-color: var(--focus-outline) !important;
+  box-shadow: var(--focus-ring) !important;
+}
+
+/* --- 10. Respeta "reducir movimiento" del sistema --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- 11. Controles nativos del navegador (casillas, listas, barras, selector
+         de archivo): que usen su variante oscura y el azul del tema --- */
+:root { color-scheme: dark; }
+input[type="checkbox"], input[type="radio"], progress, meter { accent-color: var(--button-primary-color); }
+select[multiple] option, select[size] option { background-color: transparent; color: var(--text-primary); }
+select[multiple] option:checked, select[size] option:checked,
+select[multiple]:focus option:checked, select[size]:focus option:checked {
+  /* el degradado es el único modo de cambiar el resaltado nativo en Chrome */
+  background: var(--button-primary-color) linear-gradient(0deg, var(--button-primary-color), var(--button-primary-color)) !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+select option { background-color: var(--surface-2); color: var(--text-primary); }
+input[type="file"]::file-selector-button {
+  background: var(--surface-3);
+  color: var(--text-primary);
+  border: 1px solid var(--border-secondary-color);
+  border-radius: 6px;
+  padding: 2px 10px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+input[type="file"]::file-selector-button:hover { background: var(--border-secondary-color); }
+
+/* ==========================================================================
+   v4.8 — ajustes de maquetación (2026-11-11)
+   ========================================================================== */
+
+/* --- 12. Pestañas en varias filas (Suricata tiene 13): con float, la que baja
+         se enganchaba bajo la segunda. Ahora envuelven alineadas a la izquierda. --- */
+.nav-tabs, .nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 6px;
+}
+.nav-tabs::before, .nav-tabs::after, .nav-pills::before, .nav-pills::after { display: none; }
+.nav-tabs > li, .nav-pills > li { float: none; }
+
+/* --- 13. pfBlockerNG > Reports > Unified: los dominios largos no podían partirse y
+         aparecía barra horizontal. Solo esa tabla (sus <th> llevan max-width en
+         línea); en las demás partía nombres de Feed y redes por la mitad. --- */
+.table-responsive > .table:has(> thead th[style*="max-width"]) > tbody > tr > td { overflow-wrap: anywhere; }
+
+/* --- 14. pfBlockerNG Reports: filas con gris fijo (#54585E) --- */
+tr[style*="#54585E" i] { background-color: rgba(142,194,255,.10) !important; }
+
+/* --- 15. Widget Speedtest: botón y recarga pegados al borde --- */
+#start-speedtest { margin: 10px 8px 10px 12px; }
+#updspeed { margin: 0 12px 10px; vertical-align: middle; }
+
+/* --- 16. Banderas en las columnas GeoIP (las pone /js/zebes-flags.js) --- */
+img.zebes-flag {
+  width: 24px;
+  height: 18px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.18);
+  vertical-align: -3px;
+  cursor: help;
+}
