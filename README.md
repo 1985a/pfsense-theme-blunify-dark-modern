@@ -12,6 +12,16 @@ el texto se lea bien y nada quede con los colores claros de fábrica.
 - Opcional: **banderas** en las columnas GeoIP de pfBlockerNG. Al pasar el ratón
   se ve el código de país de dos letras.
 
+![Dashboard](docs/dashboard.png)
+
+| Reglas con separadores | pfBlockerNG con banderas GeoIP |
+|---|---|
+| ![Reglas del firewall](docs/rules.png) | ![Alertas de pfBlockerNG](docs/alerts.png) |
+
+![Formulario de edición de una regla](docs/form.png)
+
+Las capturas usan datos de ejemplo: direcciones, nombres y descripciones no son reales.
+
 **Compatibilidad:** pfSense CE **2.8.x** (probado en 2.8.1). En otras versiones
 el instalador avisa y continúa, pero no está probado.
 
